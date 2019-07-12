@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Contracts Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Contracts Directory</h3>
+	<hr>
+	
+	<!-- Add a button -->
+	<a th:href="@{/contracts/showFormForAdd}"
+		class="btn btn-primary btn-sm mb-3">
+		Add Contract
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>First Name</th>
+				<th>Surname</th>
+				<th>Credit</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempContract : ${contracts}">
+			
+				<td th:text="${tempContract.customer.firstName}" />
+				<td th:text="${tempContract.customer.surname}" />
+				<td th:text="${tempContract.product.productName}" />
+				
+				<td>
+					<!-- Add "update" button/link -->
+					<a th:href="@{/contracts/showFormForUpdate(contractId=${tempContract.customer.customerId})}"
+					   class="btn btn-info btn-sm">
+						Update
+					</a>
+					
+					<!-- Add "delete" button/link -->					
+					<a th:href="@{/contracts/delete(contractId=${tempContract.customer.customerId})}"
+					   class="btn btn-danger btn-sm"
+					   onclick="if (!(confirm('Are you sure you want to delete this contract?'))) return false">
+						Delete
+					</a>
+				</td>
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>
+
+
+
